@@ -10,21 +10,12 @@ public class ItemObject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
+
     private String name;
-    @Column(nullable = false)
     private String brand;
-
-    @Column(nullable = false)
     private String type;
-
-    @Column(nullable = false)
     private double price;
-
-    @Column(nullable = true)
     private String imgUrl;
-
-    @Column(nullable = true)
     private int amountLeft;
 
     public ItemObject(int id, String name, String brand, String type, Double price, String imgUrl, int amountLeft) {

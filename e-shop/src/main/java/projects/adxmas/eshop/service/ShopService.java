@@ -1,6 +1,7 @@
 package projects.adxmas.eshop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 import projects.adxmas.eshop.dao.ClientRepository;
 import projects.adxmas.eshop.dao.CreditCardRepository;
@@ -53,7 +54,9 @@ public class ShopService {
         return itemRepository.save(toUpdate);
     }
 
-    //Updates credit card
+    //--------------------------------------------------------------------------------------------------------------
+
+    //Update method for card
     public CreditCard updateCard(int id, CreditCard creditCard) {
         CreditCard toUpdate = creditCardRepository.findById(id).orElse(null);
 
@@ -65,6 +68,7 @@ public class ShopService {
         return creditCardRepository.save(toUpdate);
     }
 
+    // Purchase operation
     public List<ItemObject> purchaseItem(int itemId, String fName, String lName, String creditCardNumber) {
         if (
                 (clientRepository.findClientByCreditCardNumber(creditCardNumber).getfName().equalsIgnoreCase(fName))
@@ -86,10 +90,25 @@ public class ShopService {
 
         // When item is bought, it reduces amountLeft by 1 and saves it to DB
         updateItem(itemId, itemRepository.getOne(itemId));
-        /*updateCard(creditCardRepository.findCreditCardIdByCreditCardNumber(creditCardNumber),
-                creditCardRepository.getOne(creditCardRepository.findCreditCardIdByCreditCardNumber(creditCardNumber)));*/
 
         return itemRepository.findAll();
     }
+
+    // GET method for card
+    public List<CreditCard> getAllCards(){
+        return creditCardRepository.findAll();
+    }
+
+    // POST method for card
+    public CreditCard addCard(CreditCard creditCard) {
+        return this.creditCardRepository.save(creditCard);
+    }
+
+    // DELETE method for card
+    public List<CreditCard> deleteCardById(int id) {
+        creditCardRepository.deleteById(id);
+        return creditCardRepository.findAll();
+    }
+
 
 }

@@ -19,7 +19,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("projects.adxmas.eshop"))
                 //.paths(regex("/rest.*"))
-                .paths(regex("/shop/items.*"))
+                .paths(regex(".*"))
                 .build();
     }
 }
